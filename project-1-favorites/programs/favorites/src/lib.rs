@@ -23,7 +23,7 @@ pub mod favorites {
             "User's hobbies are: {:?}",
             hobbies
         ); 
-
+        // write info to the account
         context.accounts.favorites.set_inner(Favorites {
             number,
             color,
@@ -53,12 +53,14 @@ pub struct SetFavorites<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
 
+    // seeds=[b"favorites", user.key().as_ref()] - look up favorites by user's public key
     #[account(
-        init_if_needed, 
-        payer = user, 
-        space = ANCHOR_DISCRIMINATOR_SIZE + Favorites::INIT_SPACE, 
+        init_if_needed,
+        payer = user,
+        space = ANCHOR_DISCRIMINATOR_SIZE + Favorites::INIT_SPACE,
         seeds=[b"favorites", user.key().as_ref()],
-    bump)]
+        bump
+    )]
     pub favorites: Account<'info, Favorites>,
 
     pub system_program: Program<'info, System>,

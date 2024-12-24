@@ -24,7 +24,9 @@ If you want to check the final result of the project, you can clone this reposit
 ```
 npm i
 anchor build
+npm install -g pnpm
 anchor test
+anchor deploy
 ```
 
 You should see the tests pass once completed.
