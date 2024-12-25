@@ -15,8 +15,13 @@ If you want to check the final result of the project, you can clone this reposit
 
 ```
 npm i
+
 cd anchor
+npm i
 anchor build
+
+cd ..
+npm run dev
 ```
 
 ## Challenges

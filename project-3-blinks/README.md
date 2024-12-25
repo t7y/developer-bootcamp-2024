@@ -14,10 +14,15 @@ We highly recommend creating your own github repository and building along with 
 If you want to check the final result of the project, you can clone this repository and run the following commands:
 
 ```
+solana-test-validator
+
 npm i
+
 cd anchor
+npm i
 anchor build
-anchor test
+anchor test --skip-local-validator --skip-deploy
+
 cd ..
 npm run dev
 ```
