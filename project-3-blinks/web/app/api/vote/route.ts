@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     return new Response("Invalid candidate", { status: 400, headers: ACTIONS_CORS_HEADERS });
   }
 
-  const connection = new Connection("http://127.0.0.1:8899", "confirmed");
+  const connection = new Connection("http://127.0.0.1:8899", "confirmed"); // consistency level
   const program: Program<Voting> = new Program(IDL, {connection});
 
   const body: ActionPostRequest = await request.json(); 
@@ -51,13 +51,14 @@ export async function POST(request: Request) {
 
   const instruction = await program.methods
     .vote(candidate, new BN(1))
-    .accounts({
-      signer: voter,
+      .accounts({
+        signer: voter,
     })
     .instruction();
 
   const blockhash = await connection.getLatestBlockhash();
 
+  // create transaction
   const transaction = new Transaction({
       feePayer: voter,
       blockhash: blockhash.blockhash,

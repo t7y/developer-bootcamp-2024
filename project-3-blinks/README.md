@@ -22,9 +22,13 @@ cd anchor
 npm i
 anchor build
 anchor test --skip-local-validator --skip-deploy
+anchor deploy
+# change the prgroam id with the deployed Program Id
 
 cd ..
 npm run dev
+
+
 ```
 
 You should be able to view the project at [http://localhost:3000](http://localhost:3000) and interact with the blinks at [dial.to](https://dial.to/?action=solana-action:http://localhost:3000/api/vote)
