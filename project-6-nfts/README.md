@@ -4,6 +4,11 @@ In this project you will learn how to create a Non-Fungible Token (NFT) on the S
 
 [You can follow along with the video to create the NFT](https://www.youtube.com/watch?v=amAq-WHAFs8&t=13752s)
 
+1. create-collections.ts
+```bash
+npx esrun create-collection.ts
+```
+
 ## Resources
 
 - [Solana Documentation](https://solana.com/docs)
