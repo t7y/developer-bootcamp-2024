@@ -21,13 +21,15 @@ import {
 
 const connection = new Connection(clusterApiUrl("devnet"));
 
+// @ts-ignore
 const user = await getKeypairFromFile();
 
+// @ts-ignore
 await airdropIfRequired(
   connection,
   user.publicKey,
-  1 * LAMPORTS_PER_SOL,
-  0.5 * LAMPORTS_PER_SOL
+  1 * LAMPORTS_PER_SOL, // airdrop amount
+  0.5 * LAMPORTS_PER_SOL // min balance
 );
 
 console.log("Loaded user", user.publicKey.toBase58());
@@ -42,16 +44,19 @@ console.log("Set up Umi instance for user");
 
 const collectionMint = generateSigner(umi);
 
+// @ts-ignore
 const transaction = await createNft(umi, {
   mint: collectionMint,
   name: "My Collection",
   symbol: "MC",
-  uri: "https://raw.githubusercontent.com/solana-developers/professional-education/main/labs/sample-nft-collection-offchain-data.json",
+  uri: "https://raw.githubusercontent.com/t7y/developer-bootcamp-2024/refs/heads/main/project-6-nfts/assets/sample-nft-offchain-data.json",
   sellerFeeBasisPoints: percentAmount(0),
   isCollection: true,
 });
+// @ts-ignore
 await transaction.sendAndConfirm(umi);
 
+// @ts-ignore
 const createdCollectionNft = await fetchDigitalAsset(
   umi,
   collectionMint.publicKey
