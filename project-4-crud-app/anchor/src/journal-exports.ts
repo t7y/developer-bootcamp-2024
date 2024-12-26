@@ -9,7 +9,7 @@ export { Journal, JournalIDL };
 
 // After updating your program ID (e.g. after running `anchor keys sync`) update the value below.
 export const JOURNAL_PROGRAM_ID = new PublicKey(
-  "EZB64BQPMPzGNEV6XvrxTSPcQHCXaRF7aXMgunxQ6LNh"
+  "DJ7cg7VUrVX1kcfuqWs6Qe3LTLcRsFD83Aovr4mAUCdB"
 );
 
 // This is a helper function to get the Counter Anchor program.

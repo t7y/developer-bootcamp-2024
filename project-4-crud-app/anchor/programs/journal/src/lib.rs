@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 // This is your program's public key and it will update
 // automatically when you build the project.
-declare_id!("94L2mJxVu6ZMmHaGsCHRQ65Kk2mea6aTnwWjSdfSsmBC");
+declare_id!("DJ7cg7VUrVX1kcfuqWs6Qe3LTLcRsFD83Aovr4mAUCdB");
 
 #[program]
 mod journal {
@@ -46,9 +46,12 @@ mod journal {
 }
 
 #[account]
+#[derive(InitSpace)]
 pub struct JournalEntryState {
     pub owner: Pubkey,
+    #[max_len(50)]
     pub title: String,
+    #[max_len(1000)]
     pub message: String,
 }
 
@@ -60,7 +63,7 @@ pub struct CreateEntry<'info> {
         seeds = [title.as_bytes(), owner.key().as_ref()], 
         bump, 
         payer = owner, 
-        space = 8 + 32 + 4 + title.len() + 4 + message.len()
+        space = 8 + JournalEntryState::INIT_SPACE
     )]
     pub journal_entry: Account<'info, JournalEntryState>,
     #[account(mut)]
@@ -75,7 +78,7 @@ pub struct UpdateEntry<'info> {
         mut,
         seeds = [title.as_bytes(), owner.key().as_ref()], 
         bump, 
-        realloc = 8 + 32 + 4 + title.len() + 4 + message.len(),
+        realloc = 8 + JournalEntryState::INIT_SPACE,
         realloc::payer = owner, 
         realloc::zero = true, 
     )]
