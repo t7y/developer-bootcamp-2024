@@ -47,8 +47,8 @@ const collectionMint = generateSigner(umi);
 // @ts-ignore
 const transaction = await createNft(umi, {
   mint: collectionMint,
-  name: "My Collection",
-  symbol: "MC",
+  name: "Leo Collection",
+  symbol: "LEOC",
   uri: "https://raw.githubusercontent.com/t7y/developer-bootcamp-2024/refs/heads/main/project-6-nfts/assets/sample-nft-offchain-data.json",
   sellerFeeBasisPoints: percentAmount(0),
   isCollection: true,
