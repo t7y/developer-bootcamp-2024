@@ -42,7 +42,7 @@ umi.use(keypairIdentity(umiUser));
 console.log("Set up Umi instance for user");
 
 const collectionAddress = publicKey(
-  "ChfGtd2wT12c2u82PHNpe4PdQ5PMqJnVECfaNbQ2uaVw"
+  "HJ5BmfSmdMW61djSx7ZgJPHeopLu3dgkiseQTTdMhQEA"
 );
 
 console.log(`Creating NFT...`);
@@ -51,8 +51,8 @@ const mint = generateSigner(umi);
 
 const transaction = await createNft(umi, {
   mint,
-  name: "My NFT",
-  uri: "https://raw.githubusercontent.com/solana-developers/professional-education/main/labs/sample-nft-offchain-data.json",
+  name: "Leo NFT",
+  uri: "https://raw.githubusercontent.com/t7y/developer-bootcamp-2024/refs/heads/main/project-6-nfts/assets/sample-nft-offchain-data.json",
   sellerFeeBasisPoints: percentAmount(0),
   collection: {
     key: collectionAddress,

@@ -8,7 +8,14 @@ In this project you will learn how to create a Non-Fungible Token (NFT) on the S
 ```bash
 npx esrun create-collection.ts
 ```
-
+2. create-nft.ts
+```bash
+npx esrun create-nft.ts
+```
+3. verify-nft.ts
+```bash
+npx esrun verify-nft.ts
+```
 ## Resources
 
 - [Solana Documentation](https://solana.com/docs)
