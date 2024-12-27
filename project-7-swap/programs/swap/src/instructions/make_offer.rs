@@ -56,8 +56,8 @@ pub fn send_offered_tokens_to_vault(
     token_a_offered_amount: u64,
 ) -> Result<()> {
     transfer_tokens(
-        &context.accounts.maker_token_account_a,
-        &context.accounts.vault,
+        &context.accounts.maker_token_account_a, // from
+        &context.accounts.vault, // to
         &token_a_offered_amount,
         &context.accounts.token_mint_a,
         &context.accounts.maker,
@@ -66,6 +66,7 @@ pub fn send_offered_tokens_to_vault(
 }
 
 pub fn save_offer(context: Context<MakeOffer>, id: u64, token_b_wanted_amount: u64) -> Result<()> {
+    // set_inner - save info
     context.accounts.offer.set_inner(Offer {
         id,
         maker: context.accounts.maker.key(),

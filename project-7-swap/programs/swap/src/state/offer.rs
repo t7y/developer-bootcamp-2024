@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 
+// user has a. wants x amount of b
 #[account]
 #[derive(InitSpace)]
 pub struct Offer {

@@ -75,11 +75,11 @@ pub struct TakeOffer<'info> {
 
 pub fn send_wanted_tokens_to_maker(context: &Context<TakeOffer>) -> Result<()> {
     transfer_tokens(
-        &context.accounts.taker_token_account_b,
-        &context.accounts.maker_token_account_b,
-        &context.accounts.offer.token_b_wanted_amount,
-        &context.accounts.token_mint_b,
-        &context.accounts.taker,
+        &context.accounts.taker_token_account_b, // from
+        &context.accounts.maker_token_account_b, // to
+        &context.accounts.offer.token_b_wanted_amount, // amount
+        &context.accounts.token_mint_b, // mint
+        &context.accounts.taker, // authority
         &context.accounts.token_program,
     )
 }
@@ -91,6 +91,7 @@ pub fn withdraw_and_close_vault(context: Context<TakeOffer>) -> Result<()> {
         &context.accounts.offer.id.to_le_bytes()[..],
         &[context.accounts.offer.bump],
     ];
+    // prepare signer seeds for creating a Program Derived Address (PDA).
     let signer_seeds = [&seeds[..]];
 
     let accounts = TransferChecked {

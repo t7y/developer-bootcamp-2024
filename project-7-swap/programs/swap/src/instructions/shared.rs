@@ -18,6 +18,7 @@ pub fn transfer_tokens<'info>(
         authority: authority.to_account_info(),
     };
 
+    // Cross-Program Invocations (CPI) - allow a program to call another program on Solana
     let cpi_context = CpiContext::new(token_program.to_account_info(), transfer_accounts_options);
 
     transfer_checked(cpi_context, *amount, mint.decimals)
