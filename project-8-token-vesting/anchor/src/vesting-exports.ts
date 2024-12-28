@@ -21,7 +21,7 @@ export function getVestingProgramId(cluster: Cluster) {
     case 'devnet':
     case 'testnet':
       // This is the program ID for the Vesting program on devnet and testnet.
-      return new PublicKey('2vKg76rA1Ho27YD4uuc2Z2FCwRTySxdyHup1JjsXS6dp');
+      return new PublicKey('F2cPYiffrHjwgXmk1dfbQK3Pcs2q4HT2sohGgbQyuuq9');
     case 'mainnet-beta':
     default:
       return VESTING_PROGRAM_ID;

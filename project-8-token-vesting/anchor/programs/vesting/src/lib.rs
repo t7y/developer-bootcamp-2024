@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::token_interface::{ self, Mint, TokenAccount, TokenInterface, TransferChecked };
 
-declare_id!("GFdLg11UBR8ZeePW43ZyD1gY4z4UQ96LPa22YBgnn4z8");
+declare_id!("F2cPYiffrHjwgXmk1dfbQK3Pcs2q4HT2sohGgbQyuuq9");
 #[program]
 pub mod vesting {
     use super::*;
@@ -116,6 +116,7 @@ pub struct CreateVestingAccount<'info> {
         bump
     )]
     pub treasury_token_account: InterfaceAccount<'info, TokenAccount>,
+
     pub token_program: Interface<'info, TokenInterface>,
     pub system_program: Program<'info, System>,
 }
