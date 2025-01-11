@@ -24,16 +24,31 @@ use anchor_spl::metadata::{
 };
 
 
-declare_id!("2RTh2Y4e2N421EbSnUYTKdGqDHJH7etxZb3VrWDMpNMY");
+declare_id!("8MhZfBSjT5wr1x8n1nunLfuAuduKeHExDD3UzJNyfayg");
 
 #[constant]
 pub const NAME: &str = "Token Lottery Ticket #";
 #[constant]
-pub const URI: &str = "Token Lottery";
+pub const URI: &str = "https://raw.githubusercontent.com/t7y/developer-bootcamp-2024/refs/heads/main/project-9-token-lottery/metadata.json";
 #[constant]
 pub const SYMBOL: &str = "TICKET";
 
-
+/**
+    Key Features of the Code
+	1.	Lottery Initialization (initialize_config and initialize_lottery):
+        •	Sets up the lottery parameters like start and end times, ticket price, and storage for randomness and ticket counts.
+        •	Mints a collection NFT to serve as the parent or collection identifier for all tickets.
+	2.	Ticket Purchase (buy_ticket):
+        •	Ensures the lottery is open by checking the current slot against start and end times.
+        •	Transfers SOL (ticket price) from the user to the lottery pot.
+        •	Mints a unique NFT for the buyer (as the lottery ticket) and links it to the collection NFT.
+        •	Creates and verifies metadata for the ticket NFT using the Metaplex Token Metadata program.
+	3.	Randomness and Winner Selection (commit_a_winner, choose_a_winner):
+        •	Integrates randomness from an external randomness account.
+        •	Determines a winner based on the randomness and number of tickets sold.
+	4.	Prize Claiming (claim_prize):
+	    •	Validates the winning ticket’s metadata and ensures the ticket owner claims the prize.
+**/
 #[program]
 pub mod token_lottery {
 
@@ -141,6 +156,13 @@ pub mod token_lottery {
         Ok(())
     }
 
+    /**
+    1.	Verifies that the lottery is open.
+    2.	Transfers funds from the buyer to the lottery account.
+    3.	Mints a new ticket NFT for the buyer.
+    4.	Associates metadata with the minted NFT.
+    5.	Verifies the ticket NFT as part of the collection.
+    **/
     pub fn buy_ticket(ctx: Context<BuyTicket>) -> Result<()> {
         let clock = Clock::get()?;
         let ticket_name = NAME.to_owned() + ctx.accounts.token_lottery.ticket_num.to_string().as_str();
@@ -150,6 +172,7 @@ pub mod token_lottery {
             return Err(ErrorCode::LotteryNotOpen.into());
         }
 
+        // Cpi - cross program invocation
         system_program::transfer(
             CpiContext::new(
                 ctx.accounts.system_program.to_account_info(),
@@ -158,11 +181,12 @@ pub mod token_lottery {
                     to: ctx.accounts.token_lottery.to_account_info(),
                 },
             ),
-            ctx.accounts.token_lottery.price,
+            ctx.accounts.token_lottery.price, // set the price
         )?;
 
         ctx.accounts.token_lottery.lottery_pot_amount += ctx.accounts.token_lottery.price;
 
+        // Used to construct PDA seeds, enabling deterministic and secure creation of accounts in Solana.
         let signer_seeds: &[&[&[u8]]] = &[&[
             b"collection_mint".as_ref(),
             &[ctx.bumps.collection_mint],
@@ -226,7 +250,7 @@ pub mod token_lottery {
                 },
                 &signer_seeds,
             ),
-            Some(0),
+            Some(0), //  Ensures that each ticket minted for the lottery is a unique, one-of-a-kind NFT.
         )?;
 
         // verify nft as part of collection
@@ -554,6 +578,7 @@ pub struct InitializeLottery<'info> {
     #[account(mut)]
     pub master_edition: UncheckedAccount<'info>,
 
+    // Declares an account that stores the token balances associated with the collection mint.
     #[account(
         init_if_needed,
         payer = payer,
