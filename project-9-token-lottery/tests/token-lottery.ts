@@ -180,6 +180,7 @@ describe("token-lottery", () => {
       commitSignature
     );
 
+    // Choose a winner
     const sbRevealIx = await randomness.revealIx();
     const revealIx = await program.methods.chooseAWinner()
       .accounts({
@@ -248,7 +249,7 @@ describe("token-lottery", () => {
       feePayer: wallet.payer.publicKey,
     }).add(claimIx);
 
-    const claimSig = await anchor.web3.sendAndConfirmTransaction(connection, claimTx, [wallet.payer]);
+    const claimSig = await anchor.web3.sendAndConfirmTransaction(connection, claimTx, [wallet.payer], {skipPreflight: true});
     console.log(claimSig);
 
   });

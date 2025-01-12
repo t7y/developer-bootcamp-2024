@@ -307,6 +307,7 @@ pub mod token_lottery {
         if ctx.accounts.payer.key() != token_lottery.authority {
             return Err(ErrorCode::NotAuthorized.into());
         }
+        // lottery has already ended
         if clock.slot < token_lottery.lottery_end {
             msg!("Current slot: {}", clock.slot);
             msg!("End slot: {}", token_lottery.lottery_end);
