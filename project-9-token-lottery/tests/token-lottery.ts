@@ -250,8 +250,7 @@ describe("token-lottery", () => {
     }).add(claimIx);
 
     const claimSig = await anchor.web3.sendAndConfirmTransaction(connection, claimTx, [wallet.payer], {skipPreflight: true});
-    console.log(claimSig);
-
+    console.log("claim signature: ", claimSig);
   });
 
 });
