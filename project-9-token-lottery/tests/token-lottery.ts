@@ -4,8 +4,9 @@ import { Program } from "@coral-xyz/anchor";
 import { TokenLottery } from "../target/types/token_lottery";
 import { TOKEN_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/utils/token";
 import { getAssociatedTokenAddressSync } from "@solana/spl-token";
+import * as dotenv from 'dotenv';
 
-
+dotenv.config();
 describe("token-lottery", () => {
   // Configure the client to use the local cluster.
   const provider = anchor.AnchorProvider.env();
@@ -21,8 +22,8 @@ describe("token-lottery", () => {
 
   before("Loading switchboard program", async () => {
     const switchboardIDL = await anchor.Program.fetchIdl(
-      sb.SB_ON_DEMAND_PID, 
-      {connection: new anchor.web3.Connection("https://mainnet.helius-rpc.com/?api-key=792d0c03-a2b0-469e-b4ad-1c3f2308158c")}
+      sb.ON_DEMAND_MAINNET_PID,
+      {connection: new anchor.web3.Connection(`https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`)}
     );
     switchboardProgram = new anchor.Program(switchboardIDL, provider);
   });
