@@ -11,8 +11,8 @@ stablecoin = "2NxDYBePnTPXUobX3FuSQC14AXMyk4AuU64neREkaXNc"
 url = "https://api.apr.dev"
 
 [provider]
-# cluster = "Devnet"
-cluster = "Localnet"
+cluster = "Devnet"
+# cluster = "Localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

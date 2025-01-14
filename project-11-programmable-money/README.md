@@ -25,6 +25,7 @@ solana-test-validator --clone 7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE --url
 
 ```shell
 anchor deploy --provider.cluster localnet
+anchor deploy --provider.cluster devnet
 ```
 
 4. Test
