@@ -18,7 +18,7 @@ anchor build
 2. Run local validator
 
 ```shell
-solana-test-validator
+solana-test-validator --clone 7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE --url mainnet-beta --reset
 ```
 
 3. Deploy the program locally
@@ -30,5 +30,5 @@ anchor deploy --provider.cluster localnet
 4. Test
 
 ```shell
-anchor test
+anchor test --skip-local-validator
 ```

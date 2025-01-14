@@ -5,13 +5,14 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-stablecoin = "6DjiD8tQhJ9ZS3WZrwNubfoBRBrqfWacNR3bXBQ7ir91"
+stablecoin = "2NxDYBePnTPXUobX3FuSQC14AXMyk4AuU64neREkaXNc"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+# cluster = "Devnet"
+cluster = "Localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
@@ -22,11 +23,12 @@ startup_wait = 5000
 shutdown_wait = 2000
 upgradeable = false
 
-[test.validator]
-bind_address = "0.0.0.0"
-url = "https://api.mainnet-beta.solana.com"
-ledger = ".anchor/test-ledger"
-rpc_port = 8899
+# [test.validator]
+# bind_address = "0.0.0.0"
+# url = "https://api.mainnet-beta.solana.com"
+# # url = "http://localhost:8899"  # Local test validator
+# ledger = ".anchor/test-ledger"
+# rpc_port = 8899
 
-[[test.validator.clone]]
-address = "7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE"
+# [[test.validator.clone]]
+# address = "7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE"

@@ -45,7 +45,8 @@ pub fn process_liquidate(ctx: Context<Liquidate>, amount_to_burn: u64) -> Result
         &ctx.accounts.config_account,
         &ctx.accounts.price_update,
     )?;
-
+    // If the health factor is above the threshold, it means the borrower 
+    // still has adequate collateral, so liquidation is not warranted.
     require!(
         health_factor < ctx.accounts.config_account.min_health_factor,
         CustomError::AboveMinimumHealthFactor
@@ -78,6 +79,7 @@ pub fn process_liquidate(ctx: Context<Liquidate>, amount_to_burn: u64) -> Result
     )?;
 
     let collateral_account = &mut ctx.accounts.collateral_account;
+    // liquidation already happened
     collateral_account.lamport_balance = ctx.accounts.sol_account.lamports();
     collateral_account.amount_minted -= amount_to_burn;
 
@@ -87,5 +89,6 @@ pub fn process_liquidate(ctx: Context<Liquidate>, amount_to_burn: u64) -> Result
         &ctx.accounts.config_account,
         &ctx.accounts.price_update,
     )?;
+
     Ok(())
 }

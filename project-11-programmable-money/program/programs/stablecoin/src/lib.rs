@@ -7,7 +7,7 @@ mod error;
 mod instructions;
 mod state;
 
-declare_id!("6DjiD8tQhJ9ZS3WZrwNubfoBRBrqfWacNR3bXBQ7ir91");
+declare_id!("2NxDYBePnTPXUobX3FuSQC14AXMyk4AuU64neREkaXNc");
 
 #[program]
 pub mod stablecoin {
