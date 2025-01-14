@@ -35,6 +35,7 @@ pub fn deposit_sol_internal<'info>(
     system_program: &Program<'info, System>,
     amount: u64,
 ) -> Result<()> {
+    // transfer here doesn't need a signer (don't need new_with_signer) since it originates from the user
     transfer(
         CpiContext::new(
             system_program.to_account_info(),

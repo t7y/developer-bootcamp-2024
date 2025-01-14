@@ -40,6 +40,7 @@ pub fn calculate_health_factor(
         collateral.amount_minted as f64 / 1e9
     );
 
+    // Handle division by zero
     if collateral.amount_minted == 0 {
         msg!("Health Factor Max");
         return Ok(u64::MAX);
@@ -82,7 +83,7 @@ fn get_usd_value(amount_in_lamports: &u64, price_feed: &Account<PriceUpdateV2>) 
     // Program log: USD Value: 68.097317100
     // Program log: Outstanding Token Amount (Minted): 1.500000000
     // Program log: Health Factor: 22
-    msg!("*** CONVERT USD TO SOL ***");
+    msg!("*** CONVERT SOL TO USD ***");
     msg!("SOL/USD Price : {:.9}", price_in_usd as f64 / 1e9);
     msg!("SOL Amount    : {:.9}", *amount_in_lamports as f64 / 1e9);
     msg!("USD Value     : {:.9}", amount_in_usd as f64 / 1e9);

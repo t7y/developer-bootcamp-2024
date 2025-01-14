@@ -33,10 +33,10 @@ pub struct DepositCollateralAndMintTokens<'info> {
         seeds = [SEED_SOL_ACCOUNT, depositor.key().as_ref()],
         bump,
     )]
-    pub sol_account: SystemAccount<'info>,
+    pub sol_account: SystemAccount<'info>, // dedicated collateral account for tracking the SOL deposited by the user
     #[account(mut)]
     pub mint_account: InterfaceAccount<'info, Mint>,
-    pub price_update: Account<'info, PriceUpdateV2>,
+    pub price_update: Account<'info, PriceUpdateV2>, // oracle
     #[account(
         init_if_needed,
         payer = depositor,
@@ -44,9 +44,9 @@ pub struct DepositCollateralAndMintTokens<'info> {
         associated_token::authority = depositor,
         associated_token::token_program = token_program
     )]
-    pub token_account: InterfaceAccount<'info, TokenAccount>,
+    pub token_account: InterfaceAccount<'info, TokenAccount>, // wallet address
     pub token_program: Program<'info, Token2022>,
-    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub associated_token_program: Program<'info, AssociatedToken>, // hold tokens for a specific wallet address and mint
     pub system_program: Program<'info, System>,
 }
 
@@ -89,5 +89,6 @@ pub fn process_deposit_collateral_and_mint_tokens(
         ctx.accounts.config_account.bump_mint_account,
         amount_to_mint,
     )?;
+    
     Ok(())
 }

@@ -4,7 +4,7 @@
 
 ## Frontend
 
-View hosted frontend here: [Programmable Money UI](anchor-stablecoin.vercel.app)
+View hosted frontend here: [Programmable Money UI](https://anchor-stablecoin.vercel.app/)
 
 ## Anchor Program
 

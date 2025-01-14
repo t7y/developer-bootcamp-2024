@@ -6,6 +6,7 @@ pub const SEED_SOL_ACCOUNT: &[u8] = b"sol";
 pub const SEED_MINT_ACCOUNT: &[u8] = b"mint";
 
 #[constant]
+// https://www.pyth.network/developers/price-feed-ids
 pub const FEED_ID: &str = "0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d";
 pub const MAXIMUM_AGE: u64 = 100; // allow pricefeed 100 sec old, to avoid stale price feed errors
 pub const PRICE_FEED_DECIMAL_ADJUSTMENT: u128 = 10; // price feed returns 1e8, multiple by 10 to match lamports 10e9
